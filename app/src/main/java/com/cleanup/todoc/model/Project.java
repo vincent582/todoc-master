@@ -1,5 +1,7 @@
 package com.cleanup.todoc.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,11 +10,14 @@ import android.support.annotation.Nullable;
  * <p>Models for project in which tasks are included.</p>
  *
  * @author Gaëtan HERFRAY
+ * Update By Vincent Pasdeloup 19/11/2019
  */
+@Entity
 public class Project {
     /**
      * The unique identifier of the project
      */
+    @PrimaryKey
     private final long id;
 
     /**
