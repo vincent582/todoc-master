@@ -14,6 +14,8 @@ import com.cleanup.todoc.database.dao.TaskDAO;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
+import java.util.concurrent.Executors;
+
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
 public abstract class TodocDataBase extends RoomDatabase {
 
@@ -31,7 +33,7 @@ public abstract class TodocDataBase extends RoomDatabase {
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TodocDataBase.class, "TodocDatabase.db")
-                            .addCallback(populateDatabase())
+                            .addCallback(populateDatabase(context))
                             .build();
                 }
             }
@@ -39,29 +41,18 @@ public abstract class TodocDataBase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static Callback populateDatabase() {
+    private static Callback populateDatabase(Context context) {
         return new Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
 
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("id", 1L);
-                contentValues.put("name", "Projet Tartampion");
-                contentValues.put("color", 0xFFEADAD1);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
-
-                ContentValues contentValues1 = new ContentValues();
-                contentValues.put("id", 2L);
-                contentValues.put("name", "Projet Lucidia");
-                contentValues.put("color", 0xFFB4CDBA);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues1);
-
-                ContentValues contentValues2 = new ContentValues();
-                contentValues.put("id", 3L);
-                contentValues.put("name", "Projet Circus");
-                contentValues.put("color", 0xFFA3CED2);
-                db.insert("Project", OnConflictStrategy.IGNORE, contentValues2);
+                Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        getInstance(context).projectDAO().insertAll(Project.getAllProjects());
+                    }
+                });
             }
         };
     }

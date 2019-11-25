@@ -41,6 +41,10 @@ public class TaskViewModel extends ViewModel {
         return this.currentProject;
     }
 
+    public LiveData<List<Project>> getAllProjects(){
+        return this.mProjectDataRepository.getAllProjects();
+    }
+
     public LiveData<List<Task>> getTasks(long projectId){
         return this.mTaskDataRepository.getTasks(projectId);
     }

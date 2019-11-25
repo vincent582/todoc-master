@@ -29,7 +29,7 @@ public class TaskDAOTest {
     //set data for test
     private static long PROJECT_ID = 1;
     private static Project PROJECT_DEMO = new Project(PROJECT_ID,"Project test",0xFFEADAD1);
-    private static Task TASK_DEMO = new Task(1,PROJECT_ID,"task test", new Date().getTime());
+    private static Task TASK_DEMO = new Task(PROJECT_ID,"task test", new Date().getTime());
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
