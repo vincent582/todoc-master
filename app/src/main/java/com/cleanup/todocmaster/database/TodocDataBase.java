@@ -1,18 +1,16 @@
-package com.cleanup.todoc.database;
+package com.cleanup.todocmaster.database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.cleanup.todoc.database.dao.ProjectDAO;
-import com.cleanup.todoc.database.dao.TaskDAO;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocmaster.database.dao.ProjectDAO;
+import com.cleanup.todocmaster.database.dao.TaskDAO;
+import com.cleanup.todocmaster.model.Project;
+import com.cleanup.todocmaster.model.Task;
 
 import java.util.concurrent.Executors;
 
