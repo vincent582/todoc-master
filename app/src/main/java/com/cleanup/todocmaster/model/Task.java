@@ -12,6 +12,7 @@ import java.util.Comparator;
  * <p>Model for the tasks of the application.</p>
  *
  * @author Gaëtan HERFRAY
+ * Update By Vincent Pasdeloup
  */
 @Entity(foreignKeys = @ForeignKey(entity = Project.class,
     parentColumns = "id",

@@ -35,6 +35,7 @@ import java.util.List;
  * <p>Displays the list of tasks.</p>
  *
  * @author Gaëtan HERFRAY
+ * Update By Vincent Pasdeloup
  */
 public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 

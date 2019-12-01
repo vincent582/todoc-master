@@ -19,6 +19,7 @@ import java.util.List;
  * <p>Adapter which handles the list of tasks to display in the dedicated RecyclerView.</p>
  *
  * @author Gaëtan HERFRAY
+ * Update By Vincent Pasdeloup
  */
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHolder> {
     /**
