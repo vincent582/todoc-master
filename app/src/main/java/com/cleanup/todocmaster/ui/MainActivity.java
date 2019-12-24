@@ -1,5 +1,6 @@
 package com.cleanup.todocmaster.ui;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * List of all projects available in the application
      */
-    private final Project[] allProjects = Project.getAllProjects();
+    private ArrayList<Project> allProjects = new ArrayList<Project>();
 
     /**
      * List of all current tasks of the application
@@ -124,6 +125,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         ViewModelFactory modelFactory = Injection.provideViewModelFactory(this);
         this.mTaskViewModel = ViewModelProviders.of(this,modelFactory).get(TaskViewModel.class);
         this.mTaskViewModel.getAllTasks().observe(this, this::updateTasksList);
+
+        mTaskViewModel.getAllProjects().observe(this, new Observer<List<Project>>() {
+            @Override
+            public void onChanged(@Nullable List<Project> projects) {
+                allProjects = (ArrayList<Project>) projects;
+                adapter.updateProjects(allProjects);
+            }
+        });
     }
 
     private void updateTasksList(List<Task> tasks){
@@ -312,6 +321,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (dialogSpinner != null) {
             dialogSpinner.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
 

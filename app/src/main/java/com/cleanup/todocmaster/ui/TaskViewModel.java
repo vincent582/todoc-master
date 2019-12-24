@@ -39,4 +39,8 @@ public class TaskViewModel extends ViewModel {
             this.mTaskDataRepository.deleteTask(taskId);
         });
     }
+
+    public LiveData<List<Project>> getAllProjects(){
+        return this.mProjectDataRepository.getAllProjects();
+    }
 }
